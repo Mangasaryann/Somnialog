@@ -3,7 +3,7 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from bot.database.queries import all_dreams
+from app.database.queries import all_dreams
 
 my_dreams_router = Router()
 

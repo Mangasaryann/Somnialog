@@ -2,8 +2,8 @@ from aiogram import Router,F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
 
-import bot.keyboards.keyboards as kb
-from bot.database.queries import get_emotion_stats
+import app.keyboards.keyboards as kb
+from app.database.queries import get_emotion_stats
 emotion_map_router = Router()
 
 @emotion_map_router.message(Command("emotion_map"))

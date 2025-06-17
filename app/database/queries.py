@@ -1,8 +1,8 @@
 from datetime import datetime
 from sqlalchemy import select, func
 from sqlalchemy.orm import selectinload
-from bot.database.db import async_session
-from bot.database.models import User,Category,Dream
+from app.database.db import async_session
+from app.database.models import User,Category,Dream
 
 async def set_user(tg_id,nickname):
     async with async_session() as session:
