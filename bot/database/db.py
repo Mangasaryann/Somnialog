@@ -1,6 +1,6 @@
 import os
 
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from dotenv import load_dotenv
 from bot.database.models import Base
 
@@ -17,10 +17,8 @@ def get_database_url():
 DATABASE_URL = get_database_url()
 
 engine = create_async_engine(
-    url=os.getenv("DATABASE_URL"),
-    connect_args={"connect_timeout": 10},
-    pool_pre_ping=True,)
-async_session = async_sessionmaker(engine)
+    DATABASE_URL,echo=True)
+async_session = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
 async def create_db():
     async with engine.begin() as conn:
