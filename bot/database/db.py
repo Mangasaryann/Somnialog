@@ -8,10 +8,10 @@ load_dotenv()
 
 def get_database_url():
     user = os.getenv("MYSQL_USER", "root")
-    password = os.getenv("MYSQL_PASSWORD", "admin111")
+    password = os.getenv("MYSQL_PASSWORD", "")
     host = os.getenv("MYSQL_HOST", "localhost")
     port = os.getenv("MYSQL_PORT", "3306")
-    db = os.getenv("MYSQL_DB", "somnialog")
+    db = os.getenv("MYSQL_DB", "")
     return f"mysql+aiomysql://{user}:{password}@{host}:{port}/{db}"
 
 DATABASE_URL = get_database_url()
