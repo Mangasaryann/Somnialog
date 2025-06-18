@@ -3,12 +3,10 @@ from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message
-from app.database.queries import set_user, get_user
-
+from bot.database.queries import set_user, get_user
 
 class Register(StatesGroup):
     nickname = State()
-
 
 register_router = Router()
 

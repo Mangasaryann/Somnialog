@@ -4,8 +4,8 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, CallbackQuery
-from app.database.queries import set_dream,get_user_id
-import app.keyboards.keyboards as kb
+from bot.database.queries import set_dream,get_user_id
+import bot.keyboards.keyboards as kb
 
 add_dream_router = Router()
 

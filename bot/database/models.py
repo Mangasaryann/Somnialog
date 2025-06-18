@@ -3,11 +3,9 @@ from sqlalchemy import BigInteger, String, DateTime, ForeignKey, Text, Boolean, 
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-
 class Base(AsyncAttrs, DeclarativeBase):
     __abstract__ = True
     id: Mapped[int] = mapped_column(primary_key=True)
-
 
 class User(Base):
     __tablename__ = "users"

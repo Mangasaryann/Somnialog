@@ -1,8 +1,8 @@
 from datetime import datetime
-from sqlalchemy import select, func
+from sqlalchemy import select, func, text
 from sqlalchemy.orm import selectinload
-from app.database.db import async_session
-from app.database.models import User,Category,Dream
+from bot.database.db import async_session
+from bot.database.models import User,Category,Dream
 
 async def set_user(tg_id,nickname):
     async with async_session() as session:
@@ -51,18 +51,23 @@ async def all_dreams(tg_id):
         dreams = await session.scalars(select(Dream).where(Dream.user_id == user.id))
         return dreams.all()
 
+from sqlalchemy import text
+
 async def get_emotion_stats(tg_id: int, days: int) -> dict:
     async with async_session() as session:
         user = await session.scalar(select(User).where(User.tg_id == tg_id))
+
+        interval_expr = text(f"INTERVAL :days DAY")
 
         result = await session.execute(
             select(Dream.emotion, func.count(Dream.id))
             .where(
                 Dream.user_id == user.id,
-                Dream.date >= func.date('now', f'-{days} days')
+                Dream.date >= func.date_sub(func.now(), interval_expr)
             )
             .group_by(Dream.emotion)
             .order_by(func.count(Dream.id).desc())
+            .params(days=days)
         )
         rows = result.all()
 
